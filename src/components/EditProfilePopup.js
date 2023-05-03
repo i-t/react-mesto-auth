@@ -25,8 +25,6 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   function handleSubmit(e) {
     e.preventDefault();
     onUpdateUser({ name, about });
-    onClose();
-    console.log('submit');
   }
 
   return (
@@ -47,7 +45,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
         minLength="2" 
         maxLength="40" 
         required
-        value={name}
+        value={name || ''}
         onChange={handleChangeName}
       />
       <span 
@@ -63,7 +61,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
         minLength="2" 
         maxLength="200" 
         required
-        value={about}
+        value={about || ''}
         onChange={handleChangeAbout}
       />
       <span 

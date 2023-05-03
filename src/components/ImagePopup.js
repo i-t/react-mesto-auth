@@ -1,6 +1,5 @@
 function ImagePopup({card, onClose}) {
 
-  console.log(card)
   return (
     <div className={`popup popup_open_photo ${card.name ? 'popup_opened' : ''}`}>
       <figure className="popup__figure">

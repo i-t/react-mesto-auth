@@ -14,5 +14,5 @@
 
 -----
 
-[GH-Pages](http://i-t.github.io/mesto-react)
+[GH-Pages](https://i-t.github.io/react-mesto-auth/)
 _17.05.2023_

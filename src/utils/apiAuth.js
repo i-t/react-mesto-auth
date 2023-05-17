@@ -1,23 +1,16 @@
 export const BASE_URL = 'https://auth.nomoreparties.co';
 
 const getJson = (res) => {
-  console.log(res);
   if (res.ok) {
-    console.log("все ок в getJson");
-    console.log(res);
     return res.json();
   } else {
-    // Promise.reject(`${res.status}`);
-    console.log("проблемки в getJson");
     return res.status;
   }
-
   // return (
   //   res.ok ? res.json() : Promise.reject(`${res.status}`))
 }
 
 export const signUp = (email, password) => {
-  console.log('апи старт');
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
@@ -29,7 +22,6 @@ export const signUp = (email, password) => {
       'password': password
     })
   }).then(res => getJson(res))
-    .catch(err => console.log(err));
 };
 
 export const signIn = (email, password) => {
@@ -42,10 +34,7 @@ export const signIn = (email, password) => {
   })
     .then(res => getJson(res))
     .then((data) => {
-      console.log(data);
       if (data.token) {
-        console.log("47");
-        localStorage.setItem('jwt', data.token);
         return data;
       } else {
         return;

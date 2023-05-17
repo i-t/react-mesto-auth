@@ -1,6 +1,7 @@
 import Authorization from './Authorization';
 
 function Login(props) {
+
   return (
     <Authorization
       title="Вход"

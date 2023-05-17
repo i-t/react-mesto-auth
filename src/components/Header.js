@@ -1,12 +1,12 @@
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import logo from '../images/logo.svg';
-// import { signIn } from '../utils/apiAuth';
+
 
 function Header(props) {
 
   const location = useLocation();
-  // const navigate = useNavigate();
+
 
   return (
     <header className="header">
@@ -43,5 +43,5 @@ function Header(props) {
     </header >
   )
 }
-// onClick={props.navigate('/sign-up', { replace: true })}
+
 export default Header;

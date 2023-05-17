@@ -17,13 +17,9 @@ function Authorization({ title, buttonText, auth, children }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(form);
-    console.log('email: ' + form.email + ' pw: ' + form.password);
     auth(form.email, form.password);
-
-    // sendData();
-
   }
+
 
   return (
     <section className="auth">

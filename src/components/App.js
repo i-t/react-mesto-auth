@@ -10,7 +10,6 @@ import Main from './Main';
 import Footer from './Footer';
 import ProtectedRoute from './ProtectedRoute';
 
-// import PopupWithForm from './PopupWithForm';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup'
 import AddPlacePopup from './AddPlacePopup';
@@ -32,10 +31,6 @@ function App() {
     [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false),
     [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false),
 
-
-    [token, setToken] = useState(""),
-    // [registrationError, setRegistrationError] = useState(""),
-    // [loginError, setLoginError] = useState(""),
     [userEmail, setUserEmail] = useState(""),
 
     [selectedCard, setSelectedCard] = useState({}),
@@ -46,19 +41,17 @@ function App() {
 
   useEffect(() => {
     if (localStorage.getItem('jwt')) {
-
       const jwt = localStorage.getItem('jwt');
-
       apiAuth.checkToken(jwt)
         .then((res) => {
-          if (res) {
-            setUserEmail(res.data.email);
-            setLoggedIn(true);
-            navigate('/', { replace: true });
-          }
+          setUserEmail(res.data.email);
+          setLoggedIn(true);
+          navigate('/', { replace: true });
         })
         .catch(err => console.log(err))
         .finally(() => setIsLoading(false))
+    } else {
+      setIsLoading(false);
     }
   }, [navigate])
 
@@ -71,28 +64,10 @@ function App() {
           navigate('/sign-in', { replace: true })
           setInfoTooltipOpen(true);
         }
-        // if (res === 400) {
-        //   console.log('network preview error')
-        // } else if (res.data.email) {
-        //   console.log('УСПЕХ!')
-        //   setSuccess(true);
-        //   setInfoTooltipOpen(true);
-        // }
-
-        // localStorage.setItem('jwt', token);
-        // setToken(token);
-        // setSuccess(true);
-        // setInfoTooltipOpen(true);
-        // navigate('/sign-in', { replace: true })
 
       })
       .catch((err) => {
         console.log(err)
-        // if (err === 400) {
-        //   console.log('network preview error')
-        //   setSuccess(true);
-        //   setInfoTooltipOpen(true);
-        // }
         setSuccess(false);
         setInfoTooltipOpen(true);
       })
@@ -101,9 +76,10 @@ function App() {
   function handleSignIn(email, password) {
     apiAuth.signIn(email, password)
       .then((data) => {
+        console.log(data);
+        console.log(data.token);
         if (data.token) {
-          setToken(data.token);
-          localStorage.setItem('jwt', token);
+          localStorage.setItem('jwt', data.token);
           setLoggedIn(true);
           setUserEmail(email);
           navigate('/', { replace: true })
@@ -118,7 +94,6 @@ function App() {
 
   function handleLogout() {
     localStorage.removeItem('jwt')
-    setToken("");
     setLoggedIn(false);
   }
 
@@ -212,10 +187,10 @@ function App() {
           src={loadingIcon}
           alt="Загрузка..."
         ></img>
-        {/* <div className="root__loading">Загрузка...</div> */}
       </div>
     )
   }
+
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
